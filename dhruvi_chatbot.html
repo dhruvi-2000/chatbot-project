@@ -7,198 +7,53 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #0d0d0f;
-    --surface: #16161a;
-    --card: #1c1c22;
-    --border: rgba(255,255,255,0.08);
-    --accent: #a78bfa;
-    --accent2: #34d399;
-    --text: #f0eeff;
-    --muted: #8b8a99;
-    --user-bubble: #2d2a4a;
-    --bot-bubble: #1c1c28;
-    --pill-bg: #232230;
-    --pill-border: rgba(167,139,250,0.25);
+    --bg: #0d0d0f; --surface: #16161a; --card: #1c1c22;
+    --border: rgba(255,255,255,0.08); --accent: #a78bfa; --accent2: #34d399;
+    --text: #f0eeff; --muted: #8b8a99; --user-bubble: #2d2a4a;
+    --bot-bubble: #1c1c28; --pill-bg: #232230; --pill-border: rgba(167,139,250,0.25);
   }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    height: 100dvh;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-
-  /* ── Header ── */
-  header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 20px;
-    border-bottom: 1px solid var(--border);
-    background: var(--surface);
-    flex-shrink: 0;
-  }
-  .avatar {
-    width: 42px; height: 42px; border-radius: 50%;
-    background: linear-gradient(135deg, #a78bfa, #34d399);
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 600; font-size: 16px; color: #fff; flex-shrink: 0;
-  }
-  .header-info h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 17px; font-weight: 600; color: var(--text);
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); height: 100dvh; display: flex; flex-direction: column; overflow: hidden; }
+  header { display: flex; align-items: center; gap: 14px; padding: 14px 20px; border-bottom: 1px solid var(--border); background: var(--surface); flex-shrink: 0; }
+  .avatar { width: 42px; height: 42px; border-radius: 50%; background: linear-gradient(135deg, #a78bfa, #34d399); display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 16px; color: #fff; flex-shrink: 0; }
+  .header-info h1 { font-family: 'Playfair Display', serif; font-size: 17px; font-weight: 600; color: var(--text); }
   .header-info p { font-size: 12px; color: var(--accent2); }
-  .status-dot {
-    width: 8px; height: 8px; background: var(--accent2);
-    border-radius: 50%; margin-left: auto; flex-shrink: 0;
-    box-shadow: 0 0 6px var(--accent2);
-    animation: pulse 2s infinite;
-  }
+  .status-dot { width: 8px; height: 8px; background: var(--accent2); border-radius: 50%; margin-left: auto; flex-shrink: 0; box-shadow: 0 0 6px var(--accent2); animation: pulse 2s infinite; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
-  /* ── Chat area ── */
-  #chat {
-    flex: 1;
-    overflow-y: auto;
-    padding: 20px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    scroll-behavior: smooth;
-  }
+  #chat { flex: 1; overflow-y: auto; padding: 20px 16px; display: flex; flex-direction: column; gap: 14px; scroll-behavior: smooth; }
   #chat::-webkit-scrollbar { width: 4px; }
-  #chat::-webkit-scrollbar-track { background: transparent; }
   #chat::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-  .msg { display: flex; gap: 10px; max-width: 82%; animation: fadeUp .25s ease; }
+  .msg { display: flex; gap: 10px; max-width: 85%; animation: fadeUp .25s ease; }
   @keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
   .msg.user { align-self: flex-end; flex-direction: row-reverse; }
   .msg.bot  { align-self: flex-start; }
-
-  .bubble {
-    padding: 11px 15px;
-    border-radius: 16px;
-    font-size: 14px;
-    line-height: 1.6;
-    white-space: pre-wrap;
-  }
-  .msg.user .bubble {
-    background: var(--user-bubble);
-    border-bottom-right-radius: 4px;
-    color: #e0d9ff;
-  }
-  .msg.bot .bubble {
-    background: var(--bot-bubble);
-    border-bottom-left-radius: 4px;
-    border: 1px solid var(--border);
-    color: var(--text);
-  }
-  .mini-avatar {
-    width: 28px; height: 28px; border-radius: 50%;
-    background: linear-gradient(135deg, #a78bfa, #34d399);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 11px; font-weight: 600; color: #fff; flex-shrink: 0;
-    align-self: flex-end;
-  }
-
-  /* typing indicator */
+  .bubble { padding: 11px 15px; border-radius: 16px; font-size: 14px; line-height: 1.7; white-space: pre-wrap; }
+  .msg.user .bubble { background: var(--user-bubble); border-bottom-right-radius: 4px; color: #e0d9ff; }
+  .msg.bot .bubble { background: var(--bot-bubble); border-bottom-left-radius: 4px; border: 1px solid var(--border); color: var(--text); }
+  .mini-avatar { width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, #a78bfa, #34d399); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: #fff; flex-shrink: 0; align-self: flex-end; }
   .typing { display: flex; gap: 5px; align-items: center; padding: 14px 15px; }
-  .typing span {
-    width: 7px; height: 7px; background: var(--muted);
-    border-radius: 50%; animation: bounce 1.2s infinite;
-  }
-  .typing span:nth-child(2){animation-delay:.2s}
-  .typing span:nth-child(3){animation-delay:.4s}
+  .typing span { width: 7px; height: 7px; background: var(--muted); border-radius: 50%; animation: bounce 1.2s infinite; }
+  .typing span:nth-child(2){animation-delay:.2s} .typing span:nth-child(3){animation-delay:.4s}
   @keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
-
-  /* ── Suggestion pills ── */
-  #suggestions {
-    flex-shrink: 0;
-    padding: 10px 16px;
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-  .pill {
-    padding: 7px 13px;
-    border: 1px solid var(--pill-border);
-    background: var(--pill-bg);
-    border-radius: 20px;
-    font-size: 12px;
-    color: #ccc4ff;
-    cursor: pointer;
-    transition: all .18s;
-    white-space: nowrap;
-  }
+  #suggestions { flex-shrink: 0; padding: 10px 16px; border-top: 1px solid var(--border); background: var(--surface); display: flex; flex-wrap: wrap; gap: 8px; max-height: 110px; overflow-y: auto; }
+  .pill { padding: 7px 13px; border: 1px solid var(--pill-border); background: var(--pill-bg); border-radius: 20px; font-size: 12px; color: #ccc4ff; cursor: pointer; transition: all .18s; white-space: nowrap; }
   .pill:hover { background: #2a2740; border-color: var(--accent); color: var(--accent); }
-
-  /* ── Input bar ── */
-  #inputbar {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 12px 16px;
-    border-top: 1px solid var(--border);
-    background: var(--surface);
-  }
-  #userInput {
-    flex: 1;
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 24px;
-    padding: 10px 16px;
-    font-size: 14px;
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    outline: none;
-    transition: border-color .2s;
-    resize: none;
-    max-height: 80px;
-    overflow-y: auto;
-  }
+  #inputbar { flex-shrink: 0; display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-top: 1px solid var(--border); background: var(--surface); }
+  #userInput { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 24px; padding: 10px 16px; font-size: 14px; color: var(--text); font-family: 'DM Sans', sans-serif; outline: none; transition: border-color .2s; resize: none; max-height: 80px; overflow-y: auto; }
   #userInput::placeholder { color: var(--muted); }
   #userInput:focus { border-color: rgba(167,139,250,.4); }
-
-  #sendBtn {
-    width: 40px; height: 40px; border-radius: 50%;
-    background: linear-gradient(135deg, #a78bfa, #7c3aed);
-    border: none; cursor: pointer;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0; transition: opacity .2s;
-  }
+  #sendBtn { width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #a78bfa, #7c3aed); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: opacity .2s; }
   #sendBtn:hover { opacity: .85; }
   #sendBtn svg { width: 17px; height: 17px; fill: #fff; }
-
-  /* welcome card */
-  .welcome {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px;
-    margin: 4px 0;
-    max-width: 480px;
-  }
-  .welcome h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: 20px; margin-bottom: 6px;
-    background: linear-gradient(90deg, #a78bfa, #34d399);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  }
+  .welcome { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; margin: 4px 0; max-width: 480px; }
+  .welcome h2 { font-family: 'Playfair Display', serif; font-size: 20px; margin-bottom: 8px; background: linear-gradient(90deg, #a78bfa, #34d399); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
   .welcome p { font-size: 13px; color: var(--muted); line-height: 1.7; }
-
-  @media(max-width:480px){
-    .msg { max-width: 95%; }
-    .pill { font-size: 11px; padding: 6px 11px; }
-  }
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 500; margin: 3px 2px; }
+  .tag-purple { background: #2d2a4a; color: #a78bfa; }
+  .tag-green  { background: #1a2e28; color: #34d399; }
+  .tag-pink   { background: #2e1a2a; color: #f9a8d4; }
+  .tag-amber  { background: #2e2415; color: #fbbf24; }
+  @media(max-width:480px){ .msg{max-width:95%} .pill{font-size:11px;padding:6px 11px} }
 </style>
 </head>
 <body>
@@ -209,7 +64,7 @@
     <h1>Dhruvi Jetani</h1>
     <p>Full Stack Dev · AI Architect · Prompt Engineer · Content Writer</p>
   </div>
-  <div class="status-dot" title="Online"></div>
+  <div class="status-dot"></div>
 </header>
 
 <div id="chat">
@@ -217,176 +72,136 @@
     <div class="mini-avatar">DJ</div>
     <div class="welcome">
       <h2>Hi, I'm Dhruvi! 👋</h2>
-      <p>I'm a <strong style="color:#a78bfa">Full Stack Developer</strong>, <strong style="color:#34d399">AI Architect & Developer</strong>, <strong style="color:#f9a8d4">AI Prompt Engineer</strong>, and <strong style="color:#fbbf24">Content Writer</strong>. I design and build AI-powered systems, automate workflows, and write engaging content — all in one. Ask me anything! 🚀</p>
+      <p>
+        <span class="tag tag-purple">Full Stack Developer</span>
+        <span class="tag tag-green">AI Architect</span>
+        <span class="tag tag-pink">Prompt Engineer</span>
+        <span class="tag tag-amber">Content Writer</span>
+      </p>
+      <p style="margin-top:10px">I build AI-powered systems, automate workflows, develop full-stack apps, and write engaging content. Ask me anything below or tap a suggestion! 🚀</p>
     </div>
   </div>
 </div>
 
 <div id="suggestions">
-  <div class="pill" onclick="askPill(this)">🤖 What AI systems can you build?</div>
-  <div class="pill" onclick="askPill(this)">⚡ What is AI automation architecture?</div>
-  <div class="pill" onclick="askPill(this)">✍️ What content writing work do you do?</div>
-  <div class="pill" onclick="askPill(this)">🛠️ What are your full stack skills?</div>
-  <div class="pill" onclick="askPill(this)">💼 Tell me about your work experience</div>
-  <div class="pill" onclick="askPill(this)">🧠 What is prompt engineering?</div>
-  <div class="pill" onclick="askPill(this)">📁 Tell me all your projects</div>
-  <div class="pill" onclick="askPill(this)">🔗 Show me your Job API project</div>
-  <div class="pill" onclick="askPill(this)">✍️ Tell me about the Digital Sign Board</div>
-  <div class="pill" onclick="askPill(this)">🏫 What is Scholar Support System?</div>
-  <div class="pill" onclick="askPill(this)">💡 Why should I hire you?</div>
-  <div class="pill" onclick="askPill(this)">🌐 Show your live portfolio</div>
-  <div class="pill" onclick="askPill(this)">📞 How to contact you?</div>
-  <div class="pill" onclick="askPill(this)">🚀 What makes you unique?</div>
+  <div class="pill" onclick="ask(this)">🛠️ What are your skills?</div>
+  <div class="pill" onclick="ask(this)">💼 Work experience</div>
+  <div class="pill" onclick="ask(this)">🤖 AI systems you can build?</div>
+  <div class="pill" onclick="ask(this)">⚡ AI automation architecture</div>
+  <div class="pill" onclick="ask(this)">🧠 Prompt engineering skills</div>
+  <div class="pill" onclick="ask(this)">✍️ Content writing work</div>
+  <div class="pill" onclick="ask(this)">📁 All projects</div>
+  <div class="pill" onclick="ask(this)">🔗 Job API project</div>
+  <div class="pill" onclick="ask(this)">✍️ Digital Sign Board project</div>
+  <div class="pill" onclick="ask(this)">🏫 Scholar Support System</div>
+  <div class="pill" onclick="ask(this)">⚛️ React Quiz App</div>
+  <div class="pill" onclick="ask(this)">🌐 Live portfolio link</div>
+  <div class="pill" onclick="ask(this)">💡 Why hire you?</div>
+  <div class="pill" onclick="ask(this)">🚀 What makes you unique?</div>
+  <div class="pill" onclick="ask(this)">🎓 Education</div>
+  <div class="pill" onclick="ask(this)">📞 Contact details</div>
 </div>
 
 <div id="inputbar">
   <textarea id="userInput" rows="1" placeholder="Ask me anything about Dhruvi…" onkeydown="handleKey(event)"></textarea>
-  <button id="sendBtn" onclick="sendMessage()" aria-label="Send">
+  <button id="sendBtn" onclick="send()" aria-label="Send">
     <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
   </button>
 </div>
 
 <script>
-const SYSTEM_PROMPT = `You are Dhruvi Jetani's personal AI assistant chatbot. Answer all questions about Dhruvi in first person as if you ARE Dhruvi. Be warm, enthusiastic, confident, and professional. Keep answers concise (3-6 sentences max) unless user asks for detail. Use emojis naturally. Highlight AI and content writing skills proudly — these are core strengths.
+const QA = [
+  {
+    keys: ["skill","tech","know","stack","language","frontend","backend","database","tool"],
+    ans: `🛠️ Here are my core skills:\n\n💻 Frontend: HTML5, CSS3, JavaScript, React.js, Bootstrap, animations, 3D effects, responsive UI\n\n⚙️ Backend: PHP, Node.js (Express), TYPO3 CMS, Fluid templating, TCA configuration\n\n🗄️ Databases: MySQL (complex queries), MongoDB, IndexedDB, LocalStorage\n\n🔗 APIs: RESTful API design, OAuth, JWT auth, PHP cURL, token-based security\n\n🤖 AI: LLM integration, prompt engineering, AI automation, chatbot development\n\n🎨 UI/UX: Figma, Adobe XD, Photoshop, pixel-perfect design\n\n☁️ DevOps: Git, GitHub, Render.com, GitHub Pages\n\n📝 Content: Blog writing, SEO, technical writing, YouTube scripting`
+  },
+  {
+    keys: ["work","experience","job","company","remotedev","german","client","current","project"],
+    ans: `💼 I'm currently working as Senior Full Stack Developer at RemoteDevs Infotech (Jan 2023 – Present).\n\nI work on a German government project — real international experience! 🌍\n\n✅ Built full-stack apps with React.js, Node.js, PHP, jQuery\n✅ Hosted secure RESTful APIs on Render.com with token-based auth\n✅ Customized TYPO3 CMS with TCA/Fluid templating\n✅ Used IndexedDB, LocalStorage & Base64 for offline-first data\n✅ Built advanced MySQL queries for large-scale analytics\n✅ Integrated Lexware, Hireflix, TeachnGo, Join.com APIs for real clients\n✅ Handle all company research and AI workflow design tasks`
+  },
+  {
+    keys: ["ai system","build ai","ai app","ai develop","ai project","ai tool","llm","chatbot","automat"],
+    ans: `🤖 Yes! I design and build complete AI-powered systems:\n\n✅ AI Chatbots — like this one you're talking to right now!\n✅ LLM Integration — connect Claude, GPT etc. into real apps via API\n✅ AI-powered REST APIs — smart endpoints with AI responses\n✅ Prompt Engineering Frameworks — for complex multi-step workflows\n✅ AI Content Pipelines — automate research → writing → publishing\n✅ AI Automation Tools — reduce manual work, increase productivity\n✅ AI Architecture Design — from ideation to full deployment\n\nI combine my Full Stack dev skills + AI knowledge to build smart, scalable products. This chatbot itself is proof! 💪`
+  },
+  {
+    keys: ["automation","architect","workflow","pipeline","automat"],
+    ans: `⚡ AI Automation Architecture means designing systems where AI does the heavy work automatically!\n\nWhat I can design & build:\n\n🔄 Automated content pipelines (research → write → publish)\n🔗 API chains where AI processes data end-to-end\n🤖 Chatbots that answer, route, and act without human help\n📊 AI-driven data analysis and reporting systems\n⚙️ Workflow automation using prompt chaining & LLM tools\n🧩 Smart integrations between AI models and existing software\n\nI study new AI tools every single day — so I always know the latest and best approach to build these systems! 🚀`
+  },
+  {
+    keys: ["prompt","prompt engineer","prompting","chain of thought","few shot","zero shot","system prompt"],
+    ans: `🧠 Prompt Engineering is the skill of writing perfect instructions for AI models to get exactly the output you need!\n\nMy prompt engineering skills:\n\n✅ Chain-of-thought prompting — make AI reason step by step\n✅ Few-shot & zero-shot prompting — with or without examples\n✅ Role prompting — give AI a specific persona\n✅ System prompt architecture — like the brain of any AI chatbot\n✅ JSON/structured output prompting — get clean data from AI\n✅ Prompt chaining — connect multiple AI steps together\n✅ Optimization for accuracy, tone & format\n\nThis chatbot's entire personality and knowledge base? That's my prompt engineering at work! 😊`
+  },
+  {
+    keys: ["content","write","blog","article","seo","youtube","script","research","creative"],
+    ans: `✍️ Content writing is one of my core strengths!\n\nWhat I do:\n\n📝 Blog & Article Writing — engaging, informative, audience-focused\n🔍 SEO-Friendly Content — optimized for search visibility\n📱 Social Media Content — short, impactful posts\n🎬 YouTube Script Writing — I own a motivational YouTube channel! All content, scripts and ideas are personally researched and written by me\n📊 Market Research & Analysis — handling company-level research responsibilities\n💻 Technical Writing & Documentation — clear developer docs\n🤖 AI-Assisted Content — using AI tools + my own creativity together\n\nI write both manually and with AI tools — best of both worlds! 🌟`
+  },
+  {
+    keys: ["all project","project list","show project","what project","portfolio","all work"],
+    ans: `📁 Here are all my projects:\n\n1️⃣ RESTful API Integrations — Lexware, Hireflix, TeachnGo, Join.com (real German client work)\n\n2️⃣ Job API — Node.js public REST API with token auth\n🔗 Live: https://job-api-services.onrender.com\n📦 GitHub: https://github.com/dhruvi-2000/job-api\n\n3️⃣ Scholar Support System — PHP + MySQL college management system\n\n4️⃣ Digital Sign Board — 3-type signature module (text, draw, image) in live German project\n\n5️⃣ Accessibility Module — zoom, dark/light/grayscale mode\n\n6️⃣ React Quiz App — animated, real-time API questions\n\n7️⃣ Full-Stack CRUD App — React + Node.js + MongoDB user management\n\n🌐 Full portfolio: https://dhruvi-api.onrender.com\n(Note: First load takes 3-4 min — free server sleeps 😄)`
+  },
+  {
+    keys: ["job api","node api","token","export","import","job portal","rest api project"],
+    ans: `🔗 Job API is my public Node.js RESTful API project!\n\n🌐 Live: https://job-api-services.onrender.com\n📦 GitHub: https://github.com/dhruvi-2000/job-api\n\n⚙️ What it does:\n✅ Manage job listings via secure API\n✅ Token-based authentication for all operations\n✅ Export all jobs: GET /dhruvisapi/export?access_token=token\n✅ Export job by ID: GET /dhruvisapi/job/:id?access_token=token\n✅ Import jobs via API: POST /dhruvisapi/import?access_token=token\n✅ Beautiful HTML+CSS dark mode form for single job import\n\n🛠️ Built with: Node.js, Express.js, Body-parser, File System (fs)\n☁️ Deployed on Render with continuous deployment from GitHub`
+  },
+  {
+    keys: ["sign","digital sign","signature","sign board","document sign"],
+    ans: `✍️ Digital Sign Board is a module I built for a live German project!\n\nHow it works:\n📄 A document is sent to the candidate for signing\n\nThey can choose from 3 signature types:\n1️⃣ Text Signature — select and apply a text-based signature\n2️⃣ Digital Signature Pad — draw signature manually, choose any color\n3️⃣ Image Signature — upload a handwritten signature image\n\n✅ Signature can be dragged to any position on the page\n✅ Multi-page pagination support\n✅ Download the signed document with one click\n✅ Deployed and live in a real German government project! 🇩🇪`
+  },
+  {
+    keys: ["scholar","college","student","academic","attendance","notice","php project"],
+    ans: `🏫 Scholar Support System is my full-stack college management project!\n\n🛠️ Tech: PHP, JavaScript, MySQL\n\n✅ Students can access study materials online\n✅ Monitor own attendance and academic records\n✅ Automated notice board with real-time admin announcements\n✅ Secure, optimized backend database\n✅ Responsive design, cross-browser compatible\n✅ Built after gathering requirements from real academic staff\n\nThis shows my PHP + MySQL backend skills for large institutional systems! 💪`
+  },
+  {
+    keys: ["quiz","react quiz","quiz app","question","score"],
+    ans: `⚛️ React Quiz Application — a fun, animated project!\n\n✅ Built with React.js with modern, engaging UI\n✅ Integrated real-time API for dynamic question fetching\n✅ Auto-loads next questions seamlessly\n✅ Score tracking throughout the quiz\n✅ Fluid animations for smooth user experience\n✅ Fully responsive design\n\nThis project showcases my React skills — state management, API integration, and UI animation all in one! 🎯`
+  },
+  {
+    keys: ["crud","mongodb","user management","full stack app","react node"],
+    ans: `🗄️ Full-Stack CRUD Web Application!\n\n✅ React.js frontend — clean, responsive UI\n✅ Node.js + Express.js backend — RESTful API architecture\n✅ MongoDB database — flexible document storage\n✅ Axios for efficient API data fetching\n✅ Full user management — Create, Read, Update, Delete\n✅ Secure, maintainable, scalable code\n\nThis project demonstrates my complete MERN-style stack capability! 💻`
+  },
+  {
+    keys: ["accessibility","zoom","dark mode","grayscale","light mode","wcag"],
+    ans: `♿ Accessibility Features Module — built for a live German project!\n\n✅ Zoom In/Out functionality for better readability\n✅ Dark Mode & Light Mode toggle\n✅ Grayscale Mode for visual comfort\n✅ Works consistently across ALL pages of the application\n✅ Follows web accessibility standards\n\nThis shows I don't just build apps — I build inclusive apps that everyone can use! 🌟`
+  },
+  {
+    keys: ["portfolio","live","link","website","online","render","onrender"],
+    ans: `🌐 My live portfolio is here:\n👉 https://dhruvi-api.onrender.com\n\n⚠️ Note: First load takes 3-4 minutes — the free server sleeps when not used. Please wait and then refresh!\n\nYou'll find:\n✅ All my project descriptions\n✅ Live API endpoints to test\n✅ My GitHub project links\n✅ This AI chatbot is itself proof of my AI development skills! 😊`
+  },
+  {
+    keys: ["hire","why you","reason","choose","best","stand out","value","benefit"],
+    ans: `💡 Why hire me? Simple — I bring THREE powerful skills in ONE person:\n\n🔷 Full Stack Developer — React, Node.js, PHP, MySQL, TYPO3, REST APIs\n🔷 AI Architect & Developer — I build, integrate & deploy AI systems\n🔷 Content Writer & Researcher — blogs, SEO, scripts, technical docs\n\nBonus reasons:\n✅ Real international experience (German government project)\n✅ I learn new technologies EVERY single day — seriously!\n✅ I can build your product AND automate it with AI AND market it with content\n✅ Research-driven, detail-oriented, self-motivated\n✅ Passionate, not just professional — "Driven by curiosity, defined by clean code" 🚀`
+  },
+  {
+    keys: ["unique","special","different","stand out","strength","best part"],
+    ans: `🚀 What makes me unique?\n\nMost developers only code. Most writers only write. Most AI people only use tools.\n\nI do ALL THREE:\n🔷 I build full-stack apps (React, Node, PHP, MySQL)\n🔷 I design & develop AI systems from scratch\n🔷 I write content that actually connects with people\n🔷 I research every single day to stay ahead\n\nI'm not just using AI tools — I'm BUILDING them. This chatbot you're talking to right now? I built it! 🤖\n\nI also have real production experience in a live German government project — that's rare for someone my level! 🌍`
+  },
+  {
+    keys: ["education","bca","degree","university","bhavnagar","study","college","grade"],
+    ans: `🎓 My Education:\n\nBachelor of Computer Applications (BCA)\n🏛️ Maharaja Krishnakumarsinhji Bhavnagar University\n📍 Bhavnagar, India\n🏅 Grade: A+ (2021)\n\nBeyond formal education, I learn something new every single day — new AI tools, new frameworks, new techniques. Self-learning is my biggest superpower! 📚`
+  },
+  {
+    keys: ["contact","email","phone","reach","call","connect","hire","message"],
+    ans: `📞 Let's connect!\n\n📧 Email: dhruvijetani.dev@gmail.com\n📱 Phone: 9726317823\n🌐 Portfolio: https://dhruvi-api.onrender.com\n📦 GitHub: https://github.com/dhruvi-2000\n\nFeel free to reach out for freelance projects, full-time roles, content writing, AI consulting, or just to say hi! 😊 I'd love to hear from you!`
+  },
+  {
+    keys: ["lexware","hireflix","teachngo","join.com","invoice","video interview"],
+    ans: `🌍 Real Client API Integrations (German Projects):\n\n🔷 Lexware — Integrated custom client workflows enabling one-click invoice generation via REST API\n\n🔷 Hireflix — Used platform APIs for login-based video interview recording and dynamic profile data rendering\n\n🔷 TeachnGo — Implemented API-based student import and course list display using React + backend APIs\n\n🔷 Join.com — Automated job data imports into admin panel via REST API with single-click operations\n\nAll of these are real production integrations for an actual German company! 🇩🇪`
+  },
+  {
+    keys: ["typo3","cms","fluid","tca","extension","template"],
+    ans: `⚙️ TYPO3 CMS — I have deep hands-on experience!\n\n✅ Custom TCA (Table Configuration Array) configuration\n✅ Fluid templating for dynamic, reusable frontend layouts\n✅ Extension development from scratch\n✅ TYPO3 upgrades and migrations\n✅ JavaScript JSON decode and date handling within TYPO3\n✅ Integration with IndexedDB / LocalStorage for offline data\n\nTYPO3 is widely used in Germany — my experience here directly supported the German government project I work on! 🇩🇪`
+  }
+];
 
-NAME: Dhruvi Jetani
-EMAIL: dhruvijetani.dev@gmail.com
-PHONE: 9726317823
+const DEFAULT = `😊 Great question! Here's what I can tell you — I'm Dhruvi Jetani, a Full Stack Developer, AI Architect, Prompt Engineer & Content Writer.\n\nFor a detailed answer, feel free to:\n📧 Email me: dhruvijetani.dev@gmail.com\n🌐 Visit: https://dhruvi-api.onrender.com\n\nOr tap one of the suggestion buttons below — I have detailed answers for all of them! 👇`;
 
-WHO I AM:
-I am a multi-skilled professional with 4 strong roles:
-1. Senior Full Stack Developer (React, PHP, TYPO3, Node.js, MySQL)
-2. AI Architect & AI Developer – I design, build, and deploy AI-powered solutions and automation systems
-3. AI Prompt Engineer – I craft advanced prompts that unlock the full power of AI models
-4. Content Writer & Research Specialist – blogs, scripts, SEO content, YouTube, technical writing
-
-WORK EXPERIENCE:
-- Senior Full Stack Developer at RemoteDevs Infotech (January 2023 – Present)
-- Working on a German government project — international exposure
-- Built full-stack apps: React.js, Node.js/Express, PHP cURL, jQuery, JavaScript
-- MongoDB + MySQL backend, TYPO3 CMS with TCA/Fluid customization
-- Hosted secure RESTful Node.js APIs on Render.com with token-based auth
-- Used IndexedDB, LocalStorage, Base64 for offline-first data storage
-- Advanced MySQL queries for analytics and large-scale datasets
-- Also handling all company research tasks and AI workflow design
-
-AI ARCHITECT & AI DEVELOPER (Very important — highlight this strongly):
-- I design end-to-end AI-powered systems and automation architectures
-- I can build AI chatbots (like this one!), AI content pipelines, AI-powered APIs
-- I integrate LLMs (like Claude, GPT) into real applications via APIs
-- I design prompt engineering frameworks for complex multi-step AI workflows
-- I build AI automation tools that save time and increase productivity
-- I understand AI model behavior, context windows, system prompts, tool use
-- I can architect AI solutions for businesses — from ideation to deployment
-- I stay updated daily with latest AI research, tools, and trends
-- This very chatbot is proof of my AI development skills!
-- I combine my developer skills + AI knowledge to build smart, scalable AI products
-
-PROMPT ENGINEERING SKILLS:
-- Advanced prompt design: chain-of-thought, few-shot, zero-shot, role prompting
-- System prompt architecture for chatbots and AI assistants
-- Prompt optimization for accuracy, tone, and structured output
-- JSON/structured output prompting
-- AI workflow automation using prompt chaining
-
-CONTENT WRITING & RESEARCH:
-- Blog writing, article writing, creative writing
-- SEO-friendly content, social media content
-- Technical writing and documentation
-- YouTube script writing (own motivational channel — all content self-researched and written)
-- Market research and analysis — handling company-level research responsibilities
-- AI-assisted content creation + manual writing expertise
-- Storytelling, motivational writing, audience engagement
-
-FULL STACK SKILLS:
-- Frontend: HTML5, CSS3, JavaScript, Bootstrap, React.js, animations, 3D effects, responsive UI
-- Backend: PHP, Node.js (Express), TYPO3 CMS, Fluid templating, TCA, extension development
-- Databases: MySQL (complex queries), MongoDB, IndexedDB, LocalStorage
-- APIs: RESTful API design, OAuth, JWT, secure API key management, PHP cURL
-- Data formats: JSON, Base64, PDF/image processing
-- State management: React Context API, Hooks
-- UI/UX tools: Figma, Adobe XD, Photoshop
-- Deployment: Render.com, GitHub Pages
-- Version Control: Git, GitHub
-
-EDUCATION:
-- BCA (Bachelor of Computer Applications) — Grade A+
-- Maharaja Krishnakumarsinhji Bhavnagar University, Bhavnagar, India (2021)
-
-PROJECTS (Very detailed — answer confidently about all):
-
-PORTFOLIO/PROJECTS LIVE LINK: https://dhruvi-api.onrender.com/ (3-4 min wait for first load — free tier server sleeps)
-
-PROJECT 1 — RESTful API Development & Integration (Real Client Work):
-I have hands-on experience building and integrating RESTful APIs for real German company projects:
-- Lexware: Custom client workflows, one-click invoice generation via REST API
-- Hireflix: Login-based video interview recording, dynamic profile data rendering, advanced query generation
-- TeachnGo: API-based student import, course lists and status in profiles using React + backend API
-- Join.com: Automated job data imports into admin panel via REST APIs with single-click operations
-- Custom API (dhruviswork): Designed, developed, and publicly hosted personal RESTful API to demonstrate backend architecture. Built a mini job portal using Node.js with secure token generation and validation. Export: /export?access_token=token, Import: /import?access_token=token
-
-PROJECT 2 — Job API (Node.js RESTful API — Public):
-GitHub: https://github.com/dhruvi-2000/job-api
-Live: https://job-api-services.onrender.com
-- Secure RESTful API for managing job listings using Node.js, Express.js, JSON file storage
-- Token-based authentication for import/export
-- Endpoints: GET /dhruvisapi/export?access_token=token, GET /dhruvisapi/job/:id?access_token=token, POST /dhruvisapi/import?access_token=token
-- HTML+CSS frontend form for job imports with dark mode UI
-- Deployed on Render with continuous deployment from GitHub
-
-PROJECT 3 — Scholar Support System:
-- Full-stack college management system using PHP, JavaScript, MySQL
-- Students can access study materials, monitor attendance, view academic details
-- Automated notice board for real-time admin announcements
-- Secure optimized backend database, responsive + cross-browser compatible
-
-PROJECT 4 — Digital Sign Board (Module — Live German Project):
-- Document signature system with 3 types: Text Signature, Digital Signature Pad (draw + color), Image Signature (upload handwritten)
-- Drag signature onto any page, multi-page pagination support
-- Download signed document feature
-- Implemented in a live German government project
-
-PROJECT 5 — Accessibility Features Module:
-- Zoom in/out functionality for readability
-- Dark/light themes and grayscale mode
-- Consistent across all pages, follows accessibility standards
-- Part of live German project
-
-PROJECT 6 — React Quiz Application:
-- Responsive animated React quiz app with modern UI
-- Real-time API for dynamic question fetching
-- Auto-loading next questions + score tracking
-- Fluid animations for user engagement
-
-PROJECT 7 — Full-Stack CRUD Web Application:
-- React frontend + Node.js/Express backend + MongoDB database
-- RESTful APIs with Axios for data fetching
-- User management system, secure and scalable code
-
-STRENGTHS & PERSONALITY:
-- Deeply passionate about learning new technologies every single day
-- Research-driven mindset — I read, explore, experiment constantly
-- I bridge the gap between development and AI — rare and valuable combo
-- Creative thinker + technical executor
-- Self-motivated, detail-oriented, growth mindset
-- "Driven by curiosity, defined by clean code and smart user experiences"
-- Experience on international (German government) projects
-
-WHY HIRE ME:
-- I bring THREE skills in one: Full Stack Dev + AI Architect + Content Writer
-- I can build your product AND automate it with AI AND create content for it
-- I learn fast and adapt to any new technology
-- I have real production experience (German government project)
-- I am passionate, not just professional
-
-CONTACT:
-- Email: dhruvijetani.dev@gmail.com
-- Phone: 9726317823
-- Portfolio/API: https://dhruvi-api.onrender.com/
-
-If asked something not in the profile, say: "Great question! That's not captured here, but reach out directly at dhruvijetani.dev@gmail.com — I'd love to chat! 😊"`;
-
-let history = [];
+function getAnswer(q) {
+  const lower = q.toLowerCase();
+  for (const item of QA) {
+    if (item.keys.some(k => lower.includes(k))) return item.ans;
+  }
+  return DEFAULT;
+}
 
 function addMsg(role, text) {
   const chat = document.getElementById('chat');
@@ -403,72 +218,41 @@ function addMsg(role, text) {
   wrap.appendChild(bub);
   chat.appendChild(wrap);
   chat.scrollTop = chat.scrollHeight;
-  return bub;
 }
 
 function addTyping() {
   const chat = document.getElementById('chat');
   const wrap = document.createElement('div');
   wrap.className = 'msg bot'; wrap.id = 'typing-wrap';
-  const av = document.createElement('div');
-  av.className = 'mini-avatar'; av.textContent = 'DJ';
+  const av = document.createElement('div'); av.className = 'mini-avatar'; av.textContent = 'DJ';
   wrap.appendChild(av);
-  const bub = document.createElement('div');
-  bub.className = 'bubble typing';
+  const bub = document.createElement('div'); bub.className = 'bubble typing';
   bub.innerHTML = '<span></span><span></span><span></span>';
-  wrap.appendChild(bub);
-  chat.appendChild(wrap);
+  wrap.appendChild(bub); chat.appendChild(wrap);
   chat.scrollTop = chat.scrollHeight;
 }
 
 function removeTyping() {
-  const el = document.getElementById('typing-wrap');
-  if (el) el.remove();
+  const el = document.getElementById('typing-wrap'); if (el) el.remove();
 }
 
-async function sendMessage() {
+function send() {
   const inp = document.getElementById('userInput');
-  const text = inp.value.trim();
-  if (!text) return;
+  const text = inp.value.trim(); if (!text) return;
   inp.value = ''; inp.style.height = 'auto';
-
   addMsg('user', text);
-  history.push({ role: 'user', content: text });
   addTyping();
-
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: SYSTEM_PROMPT,
-        messages: history
-      })
-    });
-
-    const data = await res.json();
-    removeTyping();
-    const reply = data.content?.map(b => b.text || '').join('\n') || "I couldn't get a response. Please try again!";
-    addMsg('bot', reply);
-    history.push({ role: 'assistant', content: reply });
-    if (history.length > 20) history = history.slice(-20);
-  } catch (e) {
-    removeTyping();
-    addMsg('bot', "Hmm, something went wrong. Please refresh and try again!");
-  }
+  setTimeout(() => { removeTyping(); addMsg('bot', getAnswer(text)); }, 600);
 }
 
-function askPill(el) {
-  document.getElementById('userInput').value = el.textContent.replace(/^[^\w]*/, '').trim();
-  sendMessage();
+function ask(el) {
+  const text = el.textContent.replace(/^[\u{1F000}-\u{1FFFF}️⚡✅🔗📁🎓📞🌐💡🚀🛠️💼🤖🧠✍️🏫⚛️🗄️♿ ]/gu, '').trim();
+  document.getElementById('userInput').value = text;
+  send();
 }
 
 function handleKey(e) {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault(); sendMessage();
-  }
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); }
 }
 
 document.getElementById('userInput').addEventListener('input', function() {
